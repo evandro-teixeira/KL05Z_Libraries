@@ -149,33 +149,22 @@ void gpio_toggle(GPIO_MemMapPtr gpio,uint32_t pin)
  */
 bool gpio_interrupt_configuration(GPIO_MemMapPtr gpio,uint32_t pin,gpio_interrupt_t interrupt)
 {
-	PORT_MemMapPtr port;
-
 	if(gpio == GPIOA)
-	{
-		port = PORTA;
-	}
-	else if(gpio == GPIOB)
-	{
-		port = PORTB;
-	}
-	else
-	{
-		return false;
-	}
-
-	if(port == PORTA)
 	{
 		PORT_PCR_REG(PORTA_BASE_PTR,pin) |= PORT_PCR_IRQC(interrupt);
 		PORT_PCR_REG(PORTA_BASE_PTR,pin) |= PORT_PCR_ISF_MASK; // clear flag
 		// PORTB_PCR0 |= PORT_PCR_ISF_MASK; // clear flag
 		NVIC_EnableIRQ(PORTA_IRQn);
 	}
-	else // PORTB
+	else if(gpio == GPIOB)
 	{
 		PORT_PCR_REG(PORTB_BASE_PTR,pin) |= PORT_PCR_IRQC(interrupt);
 		PORT_PCR_REG(PORTB_BASE_PTR,pin) |= PORT_PCR_ISF_MASK; // clear flag
 		NVIC_EnableIRQ(PORTB_IRQn);
+	}
+	else
+	{
+		return false;
 	}
 
 	return true;
@@ -188,40 +177,53 @@ bool gpio_interrupt_configuration(GPIO_MemMapPtr gpio,uint32_t pin,gpio_interrup
  */
 bool gpio_set_callback_irq(GPIO_MemMapPtr gpio, void (*task)(void))
 {
-	PORT_MemMapPtr port;
-
 	if(gpio == GPIOA)
 	{
-		port = PORTA;
+		gpio_porta_irq = task;
 	}
 	else if(gpio == GPIOB)
 	{
-		port = PORTB;
+		gpio_portb_irq = task;
 	}
 	else
 	{
 		return false;
 	}
 
-	if(port == PORTA)
+	return true;
+}
+
+/**
+ * @brief
+ * @param gpio
+ * @param pin
+ */
+bool gpio_clear_flag(GPIO_MemMapPtr gpio, uint32_t pin)
+{
+	if(gpio == GPIOA)
 	{
-		gpio_porta_irq = task;
+		PORT_PCR_REG(PORTA_BASE_PTR,pin) |= PORT_PCR_ISF_MASK; // clear flag
 	}
-	else // PORTB
+	else if(gpio == GPIOB)
 	{
-		gpio_portb_irq = task;
+		PORT_PCR_REG(PORTB_BASE_PTR,pin) |= PORT_PCR_ISF_MASK; // clear flag
+	}
+	else
+	{
+		return false;
 	}
 
 	return true;
 }
+
 /**
  * @brief
  */
 void PORTA_IRQHandler(void)
 {
     // Clear the interrupt flag
-    PORTA_PCR12 |= PORT_PCR_ISF_MASK;
-    PORTA_PCR13 |= PORT_PCR_ISF_MASK;
+    //PORTA_PCR12 |= PORT_PCR_ISF_MASK;
+    //PORTA_PCR13 |= PORT_PCR_ISF_MASK;
 	//PORT_PCR_REG(PORTA_BASE_PTR,13) |= PORT_PCR_ISF_MASK; // clear flag
     if(gpio_porta_irq != NULL)
     {
@@ -234,8 +236,8 @@ void PORTA_IRQHandler(void)
  */
 void PORTB_IRQHandler(void)
 {
-    PORTB_PCR12 |= PORT_PCR_ISF_MASK;
-    PORTB_PCR13 |= PORT_PCR_ISF_MASK;
+    //PORTB_PCR12 |= PORT_PCR_ISF_MASK;
+    //PORTB_PCR13 |= PORT_PCR_ISF_MASK;
 	//PORT_PCR_REG(PORTB_BASE_PTR,12) |= PORT_PCR_ISF_MASK; // clear flag
     if(gpio_portb_irq != NULL)
     {

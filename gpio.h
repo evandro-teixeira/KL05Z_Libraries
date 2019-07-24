@@ -49,5 +49,6 @@ void gpio_write(GPIO_MemMapPtr gpio,uint32_t pin,gpio_status_t value);
 void gpio_toggle(GPIO_MemMapPtr gpio,uint32_t pin);
 bool gpio_interrupt_configuration(GPIO_MemMapPtr gpio,uint32_t pin,gpio_interrupt_t interrupt);
 bool gpio_set_callback_irq(GPIO_MemMapPtr gpio, void (*task)(void));
+bool gpio_clear_flag(GPIO_MemMapPtr gpio, uint32_t pin);
 
 #endif /* KL05Z_LIBRARIES_GPIO_H_ */
