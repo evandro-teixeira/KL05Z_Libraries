@@ -18,5 +18,7 @@
 #endif
 
 #include "gpio.h"
+#include "uart.h"
+
 
 #endif /* KL05Z_LIBRARIES_KL05_LIBRARIES_H_ */
