@@ -64,34 +64,33 @@ bool gpio_init (GPIO_MemMapPtr gpio,uint32_t pin,gpio_dir_config_t type)
  */
 bool gpio_resistor_enable(GPIO_MemMapPtr gpio,uint32_t pin,gpio_resistor_t resistor)
 {
-	PORT_MemMapPtr port;
-
-	if(pin >= 32)
-	{
-		return false;
-	}
-
 	if(gpio == GPIOA)
 	{
-		port = PORTA;
+		PORT_PCR_REG(PORTA_BASE_PTR,pin) |= PORT_PCR_PE(1);
+		if(resistor == GPIO_PULLDOWN_RESISTOR)
+		{
+			PORT_PCR_REG(PORTA_BASE_PTR,pin) |= PORT_PCR_PS(0);
+		}
+		else
+		{
+			PORT_PCR_REG(PORTA_BASE_PTR,pin) |= PORT_PCR_PS(1);
+		}
 	}
 	else if(gpio == GPIOB)
 	{
-		port = PORTB;
+		PORT_PCR_REG(PORTB_BASE_PTR,pin) |= PORT_PCR_PE(1);
+		if(resistor == GPIO_PULLDOWN_RESISTOR)
+		{
+			PORT_PCR_REG(PORTB_BASE_PTR,pin) |= PORT_PCR_PS(0);
+		}
+		else
+		{
+			PORT_PCR_REG(PORTB_BASE_PTR,pin) |= PORT_PCR_PS(1);
+		}
 	}
 	else
 	{
 		return false;
-	}
-
-	PORT_PCR_REG(port,pin) |= PORT_PCR_PE(1);
-	if(resistor == GPIO_PULLDOWN_RESISTOR)
-	{
-		PORT_PCR_REG(port,pin) |= PORT_PCR_PS(0);
-	}
-	else
-	{
-		PORT_PCR_REG(port,pin) |= PORT_PCR_PS(1);
 	}
 
 	return true;
