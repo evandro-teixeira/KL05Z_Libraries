@@ -10,7 +10,7 @@
 /**
  *
  */
-void (*task_uart_irq)(void);
+void (*uart_irq)(void);
 
 /**
  * @brief
@@ -146,12 +146,12 @@ bool uart_enable_irq(UART0_MemMapPtr channel)
  * @param channel
  * @param *task
  */
-bool uart_set_callback(UART0_MemMapPtr channel,void (*task)(void))
+bool uart_set_callback_irq(UART0_MemMapPtr channel,void (*task)(void))
 {
 	bool ret = false;
 	if((channel == UART0) && (task != NULL))
 	{
-		task_uart_irq = task;
+		uart_irq = task;
 		ret = true;
 	}
 	return ret;
@@ -162,8 +162,8 @@ bool uart_set_callback(UART0_MemMapPtr channel,void (*task)(void))
  */
 void UART0_IRQHandler(void)
 {
-	if(task_uart_irq != NULL)
+	if(uart_irq != NULL)
 	{
-		task_uart_irq();
+		uart_irq();
 	}
 }
