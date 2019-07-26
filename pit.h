@@ -10,6 +10,8 @@
 
 #include "kl05_libraries.h"
 
+#define PIT_USEC_TO_COUNT_us(us, clockFreqInHz) 	(uint32_t)((uint64_t)us * clockFreqInHz / 1000000U)
+#define PIT_USEC_TO_COUNT_ms(ms, clockFreqInHz) 	(uint32_t)(PIT_USEC_TO_COUNT_us(ms,clockFreqInHz)*1000)
 #define PIT_NUMBER_CHANNEL	2
 #define PIT_NUMBER_INDEX	2
 
