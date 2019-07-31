@@ -21,10 +21,7 @@ static uint8_t index_ch[PIT_NUMBER_INDEX] = {0};
  */
 bool pit_init(uint32_t value,pit_channel_t ch)
 {
-	//PIT_MCR;
-	//PIT_TCTRL0;
-
-	if(ch < 2)
+	if(ch < PIT_NUMBER_INDEX)
 	{
 		// Enable PIT clock
 		SIM_SCGC6 |= SIM_SCGC6_PIT_MASK;

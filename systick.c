@@ -53,8 +53,9 @@ void systick_delay(uint32_t delay)
 void systick_suspend_ticks(void)
 {
 	/* Disable SysTick Interrupt */
-	CLEAR_BIT(SysTick->CTRL,SysTick_CTRL_TICKINT_Msk);
-}
+	//CLEAR_BIT(SysTick->CTRL,SysTick_CTRL_TICKIN_Msk);
+	SysTick->CTRL &=~ SysTick_CTRL_TICKINT_Msk;
+ }
 
 /**
  *
@@ -62,7 +63,8 @@ void systick_suspend_ticks(void)
 void systick_resume_ticks(void)
 {
 	/* Enable SysTick Interrupt */
-	SET_BIT(SysTick->CTRL,SysTick_CTRL_TICKINT_Msk);
+	//SET_BIT(SysTick->CTRL,SysTick_CTRL_TICKINT_Msk);
+	SysTick->CTRL |= SysTick_CTRL_TICKINT_Msk;
 }
 
 /**
