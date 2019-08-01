@@ -37,19 +37,21 @@
 #define A5				GPIOB,13		// PTB13
 
 /* */
-#define LED_RED		GPIOB,8			// PTB8 - LED RGB RED	
-#define LED_GREEN	GPIOB,9			// PTB9 - LED RGB GREEN
-#define LED_RED		GPIOB,10		// PTB10 - LED RGB BLUE
+#define LED_RED			GPIOB,8			// PTB8 - LED RGB RED
+#define LED_GREEN		GPIOB,9			// PTB9 - LED RGB GREEN
+#define LED_BLUE		GPIOB,10		// PTB10 - LED RGB BLUE
 
 /* */		
-#define I2C_CONFIG I2C0,Alt_Pins_0,Mult_1,16 		// I2C CLK 180 KHz
+#define I2C_CONFIG 		I2C0,Alt_Pins_0,Mult_1,16 	// I2C CLK 180 KHz - PTB3 PTB4
+#define I2C 			I2C0
 
 /* */
-#define SPI_CONFIG SPI0,SPI_Master,SPI_Alt0,1,4	// SPI CLK 180 KHz	
+#define SPI_CONFIG 		SPI0,SPI_Master,SPI_Alt0,1,4	// SPI CLK 180 KHz - PTA6 PTA7 PTB0
+#define SPI 			SPI0
 
 /* */
-#define UART_CONFIG	UART0,Option_Pins_0,SystemCoreClock
-
+#define UART_CONFIG		UART0,Option_Pins_0,SystemCoreClock // UART - PTB1 PTB2
+#define UART 			UART0
 
 
 #endif /* BOARD_FRDM_KL05Z_H_ */
