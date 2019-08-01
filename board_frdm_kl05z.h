@@ -10,6 +10,14 @@
 
 #include "kl05_libraries.h"
 
+/* */
+#define OUTPUT 			GPIO_OUTPUT
+#define INPUT			GPIO_INPUT
+
+/* */
+#define LOW				GPIO_DISABLE
+#define HIGH			GPIO_ENABLE
+
 /*  */
 #define D0				GPIOB,2			// PTB2
 #define D1				GPIOB,1			// PTB1

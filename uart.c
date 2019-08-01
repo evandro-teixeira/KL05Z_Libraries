@@ -158,6 +158,38 @@ bool uart_set_callback_irq(UART0_MemMapPtr channel,void (*task)(void))
 }
 
 /**
+ * @brief
+ * @param channel
+ * @return
+ */
+bool uart_clear_flag_rx(UART0_MemMapPtr channel)
+{
+	bool ret = false;
+	if(channel == UART0)
+	{
+		channel->C2 |= UART0_C2_RIE_MASK;
+		ret = true;
+	}
+	return ret;
+}
+
+/**
+ * @brief
+ * @param channel
+ * @return
+ */
+bool uart_clear_flag_tx(UART0_MemMapPtr channel)
+{
+	bool ret = false;
+	if(channel == UART0)
+	{
+		channel->C2 |= UART0_C2_TIE_MASK;
+		ret = true;
+	}
+	return ret;
+}
+
+/**
  *
  */
 void UART0_IRQHandler(void)

@@ -22,5 +22,7 @@ void uart_putchar (UART0_MemMapPtr channel, char ch);
 void uart_put_string(UART0_MemMapPtr channel, char *txt);
 bool uart_enable_irq(UART0_MemMapPtr channel);
 bool uart_set_callback_irq(UART0_MemMapPtr channel,void (*task)(void));
+bool uart_clear_flag_rx(UART0_MemMapPtr channel);
+bool uart_clear_flag_tx(UART0_MemMapPtr channel);
 
 #endif /* KL05Z_LIBRARIES_UART_H_ */
