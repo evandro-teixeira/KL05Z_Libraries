@@ -29,5 +29,7 @@
 #include "pit.h"
 #include "spi.h"
 #include "systick.h"
+#include "tpm.h"
+#include "i2c.h"
 
 #endif /* KL05Z_LIBRARIES_KL05_LIBRARIES_H_ */

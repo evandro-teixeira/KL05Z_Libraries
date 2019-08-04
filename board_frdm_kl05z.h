@@ -22,7 +22,7 @@
 #define D0				GPIOB,2			// PTB2
 #define D1				GPIOB,1			// PTB1
 #define D2				GPIOA,11		// PTA11
-#define D3				GPIOB,5			// PTA11
+#define D3				GPIOB,5			// PTB5
 #define D4				GPIOA,10		// PTA10
 #define D5				GPIOA,12		// PTA12
 #define D6				GPIOB,6			// PTB6
@@ -43,6 +43,32 @@
 #define A3				GPIOA,0			// PTA0
 #define A4				GPIOA,9			// PTA9
 #define A5				GPIOB,13		// PTB13
+
+/* */
+#define PWM_TPM0(freq)	TPM0,SystemCoreClock,freq,TPM_EDGE_PWM
+#define PWM_TPM1(freq)	TPM1,SystemCoreClock,freq,TPM_EDGE_PWM
+
+/* */
+#define PWM_INIT_D3		TPM1,tpm_pwm_channel_1,TPM_PWM_H,GPIOB,5	// PTB5
+#define PWM_INIT_D5		TPM1,tpm_pwm_channel_0,TPM_PWM_H,GPIOA,12	// PTA12
+#define PWM_INIT_D6		TPM0,tpm_pwm_channel_3,TPM_PWM_H,GPIOB,6	// PTB6
+#define PWM_INIT_D7		TPM0,tpm_pwm_channel_2,TPM_PWM_H,GPIOB,7	// PTB7
+#define PWM_INIT_D8		TPM0,tpm_pwm_channel_1,TPM_PWM_H,GPIOB,10	// PTB10
+#define PWM_INIT_D9		TPM0,tpm_pwm_channel_0,TPM_PWM_H,GPIOB,11	// PTB11
+#define PWM_INIT_D10	TPM0,tpm_pwm_channel_5,TPM_PWM_H,GPIOA,5	// PTA12
+#define PWM_INIT_A3		TPM1,tpm_pwm_channel_0,TPM_PWM_H,GPIOA,0	// PTA0
+#define PWM_INIT_A5		TPM1,tpm_pwm_channel_1,TPM_PWM_H,GPIOB,13	// PTB13
+
+/* */
+#define PWM_D3(value)	TPM1,tpm_pwm_channel_1,value	// PTB5
+#define PWM_D5(value)	TPM1,tpm_pwm_channel_0,value	// PTA12
+#define PWM_D6(value)	TPM0,tpm_pwm_channel_3,value	// PTB6
+#define PWM_D7(value)	TPM0,tpm_pwm_channel_2,value	// PTB7
+#define PWM_D8(value)	TPM0,tpm_pwm_channel_1,value	// PTB10
+#define PWM_D9(value)	TPM0,tpm_pwm_channel_0,value	// PTB11
+#define PWM_D10(value)	TPM0,tpm_pwm_channel_5,value	// PTA12
+#define PWM_A3(value)	TPM1,tpm_pwm_channel_0,value	// PTA0
+#define PWM_A5(value)	TPM1,tpm_pwm_channel_1,value	// PTB13
 
 /* */
 #define LED_RED			GPIOB,8			// PTB8 - LED RGB RED
