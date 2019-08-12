@@ -83,6 +83,6 @@ Enviando e recebendo dados pela Serial
 
 ```sh
 data = uart_getchar(UART);            // Recebe byte de pela serial
-uart_getchar(UART,data);              // Enviando byte de pela serial
+uart_putchar(UART,data);              // Enviando byte de pela serial
 uart_put_string(UART,"Hello Word");   // Enviando string pela serial
 ```
