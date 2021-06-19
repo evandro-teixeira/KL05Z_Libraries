@@ -87,5 +87,9 @@
 #define UART_CONFIG		UART0,Option_Pins_0,SystemCoreClock // UART - PTB1 PTB2
 #define UART 			UART0
 
+#define SERIAL_Init(x) 		uart_init(UART_CONFIG,x)
+#define SERIAL_GetChar()	uart_getchar(UART)
+#define SERIAL_PutChar(x)	uart_putchar(UART,x)
+#define SERIAL_String(x)	uart_put_string(UART,x)
 
 #endif /* BOARD_FRDM_KL05Z_H_ */
